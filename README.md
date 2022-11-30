@@ -6,10 +6,10 @@ Convert nomalized values to hexadecimal and vice versa.
 
 #### Options: 
 ```
-	-d2h, --dec-to-hex <0-255>
-	-n2h, --norm-to-hex <0-100>
-	-h2d, --hex-to-dec <00-ff>
-	-h2n, --hex-to-norm  <00-ff>"
+-d2h, --dec-to-hex <0-255>
+-n2h, --norm-to-hex <0-100>
+-h2d, --hex-to-dec <00-ff>
+-h2n, --hex-to-norm  <00-ff>"
 ```
 #### Examples: 
 ```
