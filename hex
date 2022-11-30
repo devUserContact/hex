@@ -1,0 +1,71 @@
+#!/bin/bash
+
+hex() {
+
+	cases=()
+	vars=()
+
+	args=("$@")
+
+	for arg in "${args[@]}"; do
+		if [[ $arg == "-"* ]]; then
+			cases+=("$arg")
+		else
+			vars+=("$arg")
+		fi
+	done
+
+	hexArray=({{0..9},{a..f}}{{0..9},{a..f}})
+
+	for element in "${cases[@]}"; do
+		printf "\n"
+		case ${element} in
+		"-d2h" | "--dec-to-hex")
+			printf "#"
+			for dec in "${vars[@]}"; do
+				printf %s "${hexArray[$dec]}"
+			done
+			;;
+		"-n2h" | "--norm-to-hex") 
+			printf "#"
+			for norm in "${vars[@]}"; do
+				norm="$(echo "$norm / 100" | bc -l)"
+				normZ=$(printf '%.2f ' "$norm")
+				decFloat=$(bc <<< "$normZ*255")
+				dec=$(printf '%0.f' "$decFloat")
+				printf %s "${hexArray[$dec]}"
+			done
+			;;
+		"-h2d" | "--hex-to-dec")
+			for hdec in "${vars[@]}"; do
+				printf %s "$((0x$hdec)) "
+			done
+			;;
+		"-h2n" | "--hex-to-norm") 
+			for hdec in "${vars[@]}"; do
+				norm="$(echo "$((0x$hdec)) / 255" | bc -l)"
+				printf '%.2f, ' "$norm" 
+			done
+			;;
+		"-h" | "--help") 
+			help
+			;;
+		esac
+		printf "\n\n"
+		exit
+	done
+
+}
+help() {
+	printf "Usage: hex [OPTION]... [ARGS]...
+
+Convert decimal integers to hexadecimal and vice versa.
+Convert nomalized values to hexadecimal and vice versa.
+
+Options: 
+	-d2h, --dec-to-hex <0-255>
+	-n2h, --norm-to-hex <0-100>
+	-h2d, --hex-to-dec <00-ff>
+	-h2n, --hex-to-norm  <00-ff>"
+}
+hex "$@"
