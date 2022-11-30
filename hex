@@ -1,12 +1,9 @@
 #!/bin/bash
-
 hex() {
-
 	cases=()
 	vars=()
 
 	args=("$@")
-
 	for arg in "${args[@]}"; do
 		if [[ $arg == "-"* ]]; then
 			cases+=("$arg")
@@ -54,7 +51,6 @@ hex() {
 		printf "\n\n"
 		exit
 	done
-
 }
 help() {
 	printf "Usage: hex [OPTION]... [ARGS]...
