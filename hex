@@ -26,12 +26,12 @@ hex() {
 				printf %s "${hexArray[$dec]}"
 			done
 			;;
-		"-n2h" | "--norm-to-hex") 
+		"-n2h" | "--norm-to-hex")
 			printf "#"
 			for norm in "${vars[@]}"; do
 				norm="$(echo "$norm / 100" | bc -l)"
 				normZ=$(printf '%.2f ' "$norm")
-				decFloat=$(bc <<< "$normZ*255")
+				decFloat=$(bc <<<"$normZ*255")
 				dec=$(printf '%0.f' "$decFloat")
 				printf %s "${hexArray[$dec]}"
 			done
@@ -41,13 +41,13 @@ hex() {
 				printf %s "$((0x$hdec)) "
 			done
 			;;
-		"-h2n" | "--hex-to-norm") 
+		"-h2n" | "--hex-to-norm")
 			for hdec in "${vars[@]}"; do
 				norm="$(echo "$((0x$hdec)) / 255" | bc -l)"
-				printf '%.2f, ' "$norm" 
+				printf '%.2f, ' "$norm"
 			done
 			;;
-		"-h" | "--help") 
+		"-h" | "--help")
 			help
 			;;
 		esac
