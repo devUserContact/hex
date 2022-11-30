@@ -1,8 +1,8 @@
 # hex 
 ## A bash script for basic hexadecimal conversions 
-Convert decimal integers to hexadecimal and vice versa.
 
-Convert nomalized values to hexadecimal and vice versa.
+The intended use case for this script is to improve workflows where hexadecimal, 
+decimal, and normalized values (0-1) are employed. 
 
 #### Options: 
 ```
